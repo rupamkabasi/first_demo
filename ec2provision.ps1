@@ -12,6 +12,7 @@ find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod 0664 {} \;
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 '@
+Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 
-New-EC2Instance -ImageId ami-0810abbfb78d37cdf -MinCount 1 -MaxCount 1 -KeyName myPSKeyPair -SecurityGroupId sg-0cf2aef034f1116d9 -InstanceType t2.micro -SubnetId subnet-7323b92b -Userdata $userData -EncodeUserData
+New-EC2Instance -ImageId ami-0810abbfb78d37cdf -MinCount 1 -MaxCount 1 -KeyName myPSKeyPair -SecurityGroupId sg-0cf2aef034f1116d9 -InstanceType t2.micro -SubnetId subnet-7323b92b -Userdata $userData -EncodeUserData -ProfileName user1 -Region ap-southeast-2
     
