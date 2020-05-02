@@ -14,7 +14,12 @@ echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 
-New-EC2Instance -ImageId ami-0810abbfb78d37cdf -MinCount 1 -MaxCount 1 -KeyName myPSKeyPair -SecurityGroupId sg-0cf2aef034f1116d9 -InstanceType t2.micro -SubnetId subnet-7323b92b -Userdata $userData -EncodeUserData -ProfileName user1 -Region ap-southeast-2
-
+$ec2instance = New-EC2Instance -ImageId ami-0810abbfb78d37cdf -MinCount 1 -MaxCount 1 -KeyName myPSKeyPair -SecurityGroupId sg-0cf2aef034f1116d9 -InstanceType t2.micro -SubnetId subnet-7323b92b -Userdata $userData -EncodeUserData -ProfileName user1 -Region ap-southeast-2
+$Tag = New-Object Amazon.EC2.Model.Tag
+$Tag.Key = "Name"
+$Tag.Value = $env:BUILD_TAG
+$InstanceId = $ec2instance.Instances | Select-Object -ExpandProperty InstanceId
+write-host $InstanceId
+New-EC2Tag -Resource $InstanceId -Tag $Tag
 $build_number= $env:BUILD_NUMBER
 write-host $build_number
