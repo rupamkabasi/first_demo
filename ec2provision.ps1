@@ -18,6 +18,7 @@ echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile.d/java.sh
 echo "export JRE_HOME=/usr/lib/jvm/jre" >> /etc/profile.d/java.sh
 echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile.d/java.sh
 source /etc/profile.d/java.sh
+mkdir -p /home/ec2-user/node
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 Initialize-AWSDefaults -ProfileName user1 -Region ap-southeast-2
