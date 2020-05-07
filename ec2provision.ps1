@@ -11,7 +11,7 @@ chmod 2775 /var/www
 find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod 0664 {} \;
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
-yum -y install java-11-openjdk-devel
+yum -y install java-11-openjdk-devel wget
 touch /etc/profile.d/java.sh
 echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile.d/java.sh
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile.d/java.sh
@@ -23,7 +23,7 @@ wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
 rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
 yum install jenkins -y
 systemctl start jenkins
-chkconfig jenkins on
+systemctl enable jenkins
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 Initialize-AWSDefaults -ProfileName user1 -Region ap-southeast-2
