@@ -19,6 +19,11 @@ echo "export JRE_HOME=/usr/lib/jvm/jre" >> /etc/profile.d/java.sh
 echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile.d/java.sh
 source /etc/profile.d/java.sh
 mkdir -p /home/ec2-user/node
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
+yum install jenkins -y
+systemctl start jenkins
+chkconfig jenkins on
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 Initialize-AWSDefaults -ProfileName user1 -Region ap-southeast-2
