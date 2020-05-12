@@ -11,7 +11,7 @@ chmod 2775 /var/www
 find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod 0664 {} \;
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
-yum -y install java-11-openjdk-devel wget
+yum -y install java-11-openjdk-devel wget unzip
 touch /etc/profile.d/java.sh
 echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile.d/java.sh
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile.d/java.sh
@@ -19,11 +19,11 @@ echo "export JRE_HOME=/usr/lib/jvm/jre" >> /etc/profile.d/java.sh
 echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile.d/java.sh
 source /etc/profile.d/java.sh
 mkdir -p /home/ec2-user/node
-wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
-rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
-yum install jenkins -y
-systemctl start jenkins
-systemctl enable jenkins
+dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+dnf install  --enablerepo epel-playground  ansible
+wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+unzip terraform_0.12.24_linux_amd64.zip
+cp -rp terraform /usr/local/bin/
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 Initialize-AWSDefaults -ProfileName user1 -Region ap-southeast-2
