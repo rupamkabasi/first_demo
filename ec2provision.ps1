@@ -20,7 +20,7 @@ echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.
 source /etc/profile.d/java.sh
 mkdir -p /home/ec2-user/node
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-dnf install  --enablerepo epel-playground  ansible
+dnf install -y --enablerepo epel-playground  ansible 
 wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
 unzip terraform_0.12.24_linux_amd64.zip
 cp -rp terraform /usr/local/bin/
