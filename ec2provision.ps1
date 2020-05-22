@@ -25,6 +25,9 @@ dnf install -y --enablerepo epel-playground  ansible
 wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
 unzip terraform_0.12.24_linux_amd64.zip
 cp -rp terraform /usr/local/bin/
+cd /home/ec2-user/node/
+wget http://13.211.177.44:8080/jnlpJars/agent.jar
+java -jar agent.jar -jnlpUrl http://13.211.177.44:8080/computer/Rhel-agent/slave-agent.jnlp -secret 0530a4e38be94f2548db1c7c57c161128bab65100817796c660568068686204f -workDir "/home/ec2-user/node/"
 '@
 Set-AWSCredential -AccessKey AKIAZN2TGWISBQXQXD33 -SecretKey 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 -StoreAs user1
 Initialize-AWSDefaults -ProfileName user1 -Region ap-southeast-2
